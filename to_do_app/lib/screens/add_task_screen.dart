@@ -6,13 +6,11 @@ import '../models/task.dart';
 class AddTaskScreen extends StatelessWidget {
   const AddTaskScreen({
     Key? key,
-    required this.titleController,
   }) : super(key: key);
-
-  final TextEditingController titleController;
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController titleController = TextEditingController();
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
