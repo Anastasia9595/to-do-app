@@ -30,7 +30,7 @@ class _TasksScreenState extends State<TasksScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
-        List<Task> allTasksList = state.alltasks;
+        List<Task> tasks = state.alltasks;
         return Scaffold(
           appBar: AppBar(
             title: const Text('Tasks App'),
@@ -43,16 +43,7 @@ class _TasksScreenState extends State<TasksScreen> {
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Center(
-                child: Chip(
-                  label: Text(
-                    'Tasks:',
-                  ),
-                ),
-              ),
-              TasksList(tasksList: allTasksList)
-            ],
+            children: [TasksList(tasksList: tasks)],
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => _addTask(context),
