@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 import '../../models/task.dart';
 import '../bloc_exports.dart';
@@ -24,7 +23,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
   void _onUpdateTask(UpdateTask event, Emitter<TasksState> emit) {
     final state = this.state;
     final task = event.task;
-    final index = state.alltasks.indexOf(task);
+    final int index = state.alltasks.indexOf(task);
     List<Task> allTasks = List.from(state.alltasks)..remove(task);
     task.isDone == false
         ? allTasks.insert(index, task.copyWith(isDone: true))

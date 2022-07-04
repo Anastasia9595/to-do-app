@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/screens/my_drawer.dart';
 
 import '../blocs/bloc_exports.dart';
 import '../models/task.dart';
@@ -30,7 +31,7 @@ class _TasksScreenState extends State<TasksScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
-        List<Task> tasks = state.alltasks;
+        List<Task> tasksList = state.alltasks;
         return Scaffold(
           appBar: AppBar(
             title: const Text('Tasks App'),
@@ -41,9 +42,17 @@ class _TasksScreenState extends State<TasksScreen> {
               )
             ],
           ),
+          drawer: MyDrawer(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [TasksList(tasksList: tasks)],
+            children: [
+              Chip(
+                label: Text(
+                  'Tasks: ${state.alltasks.length}',
+                ),
+              ),
+              TasksList(tasksList: tasksList),
+            ],
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => _addTask(context),
