@@ -11,6 +11,12 @@ class TaskTile extends StatelessWidget {
 
   final Task task;
 
+  void _removeOrDeleteTask(BuildContext context, Task task) {
+    task.isDeleted!
+        ? context.read<TasksBloc>().add(DeleteTask(task: task))
+        : context.read<TasksBloc>().add(RemoveTask(task: task));
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -24,7 +30,7 @@ class TaskTile extends StatelessWidget {
           context.read<TasksBloc>().add(UpdateTask(task: task));
         },
       ),
-      onLongPress: () => context.read<TasksBloc>().add(DeleteTask(task: task)),
+      onLongPress: () => _removeOrDeleteTask(context, task),
     );
   }
 }

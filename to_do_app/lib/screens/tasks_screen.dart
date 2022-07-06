@@ -9,6 +9,8 @@ import 'widgets/tasks_list.dart';
 class TasksScreen extends StatefulWidget {
   const TasksScreen({Key? key}) : super(key: key);
 
+  static const id = 'tasks_screen';
+
   @override
   State<TasksScreen> createState() => _TasksScreenState();
 }
@@ -42,7 +44,7 @@ class _TasksScreenState extends State<TasksScreen> {
               )
             ],
           ),
-          drawer: MyDrawer(),
+          drawer: const MyDrawer(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
