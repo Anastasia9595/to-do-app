@@ -29,6 +29,8 @@ class _TasksScreenState extends State<TasksScreen> {
     );
   }
 
+  bool switchValue = false;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TasksBloc, TasksState>(
@@ -41,7 +43,15 @@ class _TasksScreenState extends State<TasksScreen> {
               IconButton(
                 onPressed: () => _addTask(context),
                 icon: const Icon(Icons.add),
-              )
+              ),
+              Switch(
+                  activeColor: Colors.purple,
+                  value: switchValue,
+                  onChanged: (newValue) {
+                    setState(() {
+                      switchValue = newValue;
+                    });
+                  }),
             ],
           ),
           drawer: const MyDrawer(),
