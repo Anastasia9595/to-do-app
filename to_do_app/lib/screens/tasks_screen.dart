@@ -16,47 +16,12 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  void _addTask(BuildContext context) {
-    showModalBottomSheet(
-      isDismissible: false,
-      context: context,
-      builder: (context) => SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: const AddTaskScreen(),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TasksBloc, TasksState>(
       builder: (context, state) {
         List<Task> tasksList = state.alltasks;
         return Scaffold(
-          appBar: AppBar(
-            title: const Text('Tasks App'),
-            actions: [
-              IconButton(
-                onPressed: () => _addTask(context),
-                icon: const Icon(Icons.add),
-              ),
-              BlocBuilder<SwitchBloc, SwitchState>(
-                builder: (context, state) {
-                  return Switch(
-                      activeColor: Colors.purple,
-                      value: state.switchValue,
-                      onChanged: (newValue) {
-                        newValue
-                            ? context.read<SwitchBloc>().add(SwitchOnEvent())
-                            : context.read<SwitchBloc>().add(SwitchOffEvent());
-                      });
-                },
-              ),
-            ],
-          ),
-          drawer: const MyDrawer(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -67,11 +32,6 @@ class _TasksScreenState extends State<TasksScreen> {
               ),
               TasksList(tasksList: tasksList),
             ],
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => _addTask(context),
-            tooltip: 'Add Task',
-            child: const Icon(Icons.add),
           ),
         );
       },
